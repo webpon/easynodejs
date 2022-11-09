@@ -5,7 +5,7 @@ let app = easy.open(9000)
 //处理跨域，默认关闭
 app.cors()
 //托管静态资源
-app.static('./static')
+app.static('./')
 app.get('/').do((req, res) => {
     res.send('首页')
 })

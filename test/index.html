@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+
+<body>
+    <iframe name="stop" style="display:none;"></iframe>
+    <div class="container">
+        <!-- post信息[text/plain] -->
+        <div class="upload1">
+            <h3>post信息[text/plain]</h3>
+            <h3>form + input方式(纯html)</h3>
+            <form action="http://localhost:9000/upload" method="POST" enctype="text/plain" target="stop">
+                <label>姓名：</label><input type="text" name="name"><br />
+                <label>年龄：</label><input type="text" name="age"><br />
+                <input type="submit" value="提交">
+            </form>
+        </div>
+        <!-- post信息[x-www-form-urlencoded] -->
+        <div class="upload1">
+            <h3>post信息[x-www-form-urlencoded]</h3>
+            <h3>form + input方式(纯html)</h3>
+            <form action="http://localhost:9000/upload" method="POST" enctype="application/x-www-form-urlencoded">
+                <label>姓名：</label><input type="text" name="name"><br />
+                <label>年龄：</label><input type="text" name="age"><br />
+                <input type="submit" value="提交">
+            </form>
+        </div>
+        <div class="upload1">
+            <!-- ajax表单上传 [application/json] -->
+            <div class="upload1">
+                <h3>ajax表单上传 [application/json]</h3>
+                <h3>input方式(ajax)</h3>
+                <label>姓名：</label><input id="ajaxFormJSONName" type="text" name="name"><br />
+                <label>年龄：</label><input id="ajaxFormJSONAge" type="text" name="age"><br />
+                <button onclick="uploadFormJSON()">上传</button>
+            </div>
+            <!-- ajax表单上传 [x-www-form-urlencoded]] -->
+            <div class="upload1">
+                <h3>ajax表单上传 [x-www-form-urlencoded]]</h3>
+                <h3>input方式(ajax)</h3>
+                <label>姓名：</label><input id="ajaxFormUrlName" type="text" name="name"><br />
+                <label>年龄：</label><input id="ajaxFormUrlAge" type="text" name="age"><br />
+                <button onclick="uploadFormUrl()">上传</button>
+            </div>
+        </div>
+        <script>
+            function post(url, data, callback, type) {
+                var req = new XMLHttpRequest();
+                req.open("POST", url);
+                if (type) {
+                    req.setRequestHeader("content-type", type)
+                }
+                console.log(data);
+                req.send(data)
+                return new Promise((res, reject) => {
+                    req.onload = function () {
+                        res(req.response)
+                    }
+                    req.onerror = function () {
+                        reject()
+                    }
+                })
+            }
+            /* ajax表单上传 [application/json] */
+            function uploadFormJSON() {
+                const ajaxFormJSONName = document.querySelector('#ajaxFormJSONName').value
+                const ajaxFormJSONAge = document.querySelector('#ajaxFormJSONAge').value
+                const formObj = {
+                    name: ajaxFormJSONName,
+                    age: ajaxFormJSONAge
+                }
+                post('http://localhost:9000/upload', JSON.stringify(formObj), () => { }, 'application/json;charset=UTF-8')
+            }
+            /* ajax表单上传 [x-www-form-urlencoded] */
+            function uploadFormUrl() {
+                const ajaxFormUrlName = document.querySelector('#ajaxFormUrlName').value
+                const ajaxFormUrlAge = document.querySelector('#ajaxFormUrlAge').value
+                const sendData = `name=${ajaxFormUrlName}&age=${ajaxFormUrlAge}`
+                console.log();
+                post('http://localhost:9000/upload', sendData, () => { }, 'application/x-www-form-urlencoded')
+            }
+
+        // var req = new XMLHttpRequest();
+        // req.open("POST", 'http://localhost:9000/uploadMiniOver');
+        // req.setRequestHeader("content-type", 'application/x-www-form-urlencoded')
+
+        // req.send('a=1&b=2')
+        </script>
+</body>
+
+</html>

@@ -15,7 +15,7 @@ app.get('/ajax').do((req, res) => {
     console.log(req.body);
     res.send(req.body)
 })
-app.post('/ajax').do((req, res) => {
+app.post('/upload').do((req, res) => {
     console.log(req.body);
     res.send(req.body)
 })
@@ -24,7 +24,7 @@ app.post('/ajax').do((req, res) => {
 //如果该路径目录不存在，会自动生成
 app.post('/uploads', './static').do(
     (req, res) => {
-    console.log(req.file);
-    res.send(req.file)
+        console.log(req.file);
+        res.send(req.file)
     }
 )

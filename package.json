@@ -8,6 +8,8 @@
   "author": "webpon",
   "license": "ISC",
   "dependencies": {
+    "address": "^1.2.0",
+    "default-gateway": "^6.0.3",
     "formidable": "^1.2.2",
     "qs": "^6.10.1",
     "url-parse": "^1.5.10"

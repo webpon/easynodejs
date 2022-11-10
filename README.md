@@ -66,7 +66,7 @@ app.static("./static");
 app.cors();
 ```
 
-### 生成数据
+### 生成数据 easy.j2m
 
 ```javascript
 easy.j2m(原始数据, 配置项);

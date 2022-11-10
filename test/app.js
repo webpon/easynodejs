@@ -14,7 +14,7 @@ app.get('/').do((req, res) => {
     </head>
     <pre>
         <a href="/index.html">访问静态文件</a>
-        <a href="/j2m">根据已有的的数据模拟出相似的数据</a>
+        <a href="/j2m">根据已有的数据模拟出相似的数据</a>
     </pre>
     `
     res.writeHead(200, { 'Content-Type': 'text/html' });
